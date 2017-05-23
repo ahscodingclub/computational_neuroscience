@@ -1,0 +1,43 @@
+* a binary threshold neuron gives an output if the level of stimulation is met 
+* to incorporate this into a neural network, we give a constant input to a neuron
+  that is the negative of the threshold, called the bias
+* a perceptron is basically a binary threshold decision unit
+* a very simple and effective way of training a percepton (percepton convergence procedure)
+  is as follows: if the output is correct, leave weights alone
+                 if the output is 0 and should be 1, add the input vector to the weight vector
+                 if the output is 1 and should be 0, subtract the input vector from the weight vector
+     however, this will only work if the set of weights exists, which is not always the case
+     with the wrong features, so all of the work is in deciding on the features
+* to compute the firing of a binary threshold neuron, 
+     z = b + Sum(i-end)x(i)w(i)
+     y = 1 if z >= 0 
+         0 otherwise
+* in weight space view, we can think of the inputs as partitioning the space into parts. Weights
+  lying in one half will get the answer correct while in another section they will give the incorrect
+  answer (which ppart is determined by the output class). That is, the inputs will constrain the set
+  of weights that give the corrrect classification results
+* when we combine multiple simple weight space views of individual classifications, we achieve
+  a "cone of feasible solutions"
+* a way to make sure that our learning algorithm is actually learning towards the correct answer
+  is by providing a margin of correctness, making the answer lie further in the cone of feasible
+  solutions, making a cone inside of our cone of feasible solutions 
+***Informal sketch of proof of convergence***
+  * each time the perceptron makes a mistake, the current weight vector moves to decrease its 
+    squared distance from every weight vector in the "generously feasible" region.
+  * the squared distance decreases by at least the squared length of the input vector
+  * so after a finite number of mistakes, the weight vector must lie in the feasible
+    region IF THIS REGION EXISTS
+  QED
+*** 
+* it is true that if a set of inputs has a feasible space, it also has a generously feasible space
+***Limitations of perceptrons***  
+  * the difficulty of learning is learning the correct features
+  * if you are allowed to choose the featues by hand and if you use enough
+    features, you can do almost anything
+  * once the features are decided, there are strong limitations on perceptrons 
+  * a perceptron cannot differentiate between similar patterns after transformations 
+    * actually, it can, but multiple feature units need to be used to recognize 
+      transformations of informative sub patters
+* in a perceptron, the weights are always getting closer to a good set of weights
+  for proper classification, however in a linear neuron, the outputs are always getting
+  closer to the target outputs
